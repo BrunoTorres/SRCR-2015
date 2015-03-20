@@ -9,6 +9,29 @@
 % Base de Conhecimento com informacao genealogica.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% SICStus PROLOG: Declaracoes iniciais
+
+:- set_prolog_flag( discontiguous_warnings,off ).
+:- set_prolog_flag( single_var_warnings,off ).
+:- set_prolog_flag( unknown,fail ).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% SICStus PROLOG: definicoes iniciais
+
+:- op( 900,xfy,'::' ).
+:- dynamic filho/2.
+:- dynamic pai/2.
+:- dynamic avo/2.
+:- dynamic bisavo/2.
+:- dynamic trisavo/2.
+:- dynamic tetravo/2.
+:- dynamic neto/2.
+:- dynamic descendente/2.
+:- dynamic grau/3.
+:- dynamic genero/2.
+:- dynamic naturalidade/2.
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado filho: Filho,Pai -> {V,F}
 
 filho( joao,jose ).
@@ -40,23 +63,29 @@ avo( antonio,nadia ).
 
 bisavo( B,N ) :-
 	avo( A,N ) , filho( A,B ).
+
+bisavo( B,N ) :-
+	avo( B,X ) , filho( N,X ).
 	
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado bisavo: Trisavo,Trisneto -> {V,F}
+% Extensao do predicado trisavo: Trisavo,Trisneto -> {V,F}
 
 trisavo( T,N ) :-
 	bisavo( A,N ), filho( A,T ).
 
+trisavo( T,N ) :-
+	bisavo( T,X ), filho( N,X ).
+
 trisavo( tita,manuel ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado tetraneto: Tetraneto,Tetravo -> {V,F}
+% Extensao do predicado tetravo: Tetravo,Tetraneto -> {V,F}
 
-tetraneto( N,T ) :-
+tetravo( T,N ) :-
 	filho( N,X ), trisavo( T,X ).
-tetraneto( N,T ) :-
-	filho( X,T ), trisavo( X,N ).
+tetravo( T,N ) :-
+	filho( A,T ), trisavo( A,N ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado neto: Neto,Avo -> {V,F}
@@ -98,3 +127,5 @@ genero(joao,braga).
 genero(jose,porto).
 genero(maria,braganca).
 genero(joana,braga).
+
+
