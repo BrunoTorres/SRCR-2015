@@ -39,6 +39,7 @@
 :- dynamic insere/1.
 :- dynamic teste/1.
 :- dynamic evolucao/1.
+:- dynamic remover/1.
 :- dynamic comprimento/2.
 
 
@@ -163,7 +164,8 @@
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado filho: Filho,Pai -> {V,F}
-	filho(Henrique,Sandra).
+	filho(henrique,sandra).
+	filho(jose,manuel).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado pai: Pai,Filho -> {V,F}listing
@@ -171,16 +173,22 @@
 pai( P,F ) :-
     filho( F,P ).
 
+    pai(tatiana,carlos).
+    pai(andre,carlos).
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado avo: Avo,Neto -> {V,F}
 
 avo( A,N ) :-
 	filho( N,X ) , pai( A,X ).
 
+	avo(manuel,jorge).
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado irmao: Irmao1,Irmao2 -> {V,F}
 
 irmao(X,Y):- pai(P,X), pai(P,Y), X\==Y.
+
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado tio: Tio,Sobrinho -> {V,F}
@@ -307,39 +315,36 @@ naturalidade(joana,braga).
 equalNaturalidade(P1,P2) :- 
 				naturalidade(P1,X), naturalidade(P2,X).
 
-
-
-
-
-
-
-
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicado solucoes: Termo,Questao,Listasolucoes ->{V,F} 
-
-
-%solucoes( T,Q,S ):-
-%			T, 
-%			assert(temp(X)),
-%			fail.
-%solucoes( T,Q,S ):-
-%			assert(temp())
 
 solucoes(T,Q,S):-
 		findall(T,Q,S).
 
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+%Extensão do predicado insere
 insere(T):-
 	assert(T).
 insere(T):- retract(T),!,fail.
 
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+%Extensão do predicado teste: Invariantes -> {V,F}
 teste([]).
 teste([I|R]):- I,teste(R).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensão do predicado que permite a evolucao do conhecimento
 
 evolucao( T ) :-
 	solucoes(I,+T::I,S),
 	insere(T),
 	teste(S).
 
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensão do predicado remover que remove um dado facto
+
+remover( F ) :-
+	retract(F).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicado comprimento: Lista,Comprimento ->{V,F} 
@@ -361,43 +366,3 @@ comprimento([Y|L],C):-
 
 
 
-
-
-
-
-
-
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-%Extensao do predicado pertence: Lista,Elemento ->{V,F} 	
-
-pertence([],X):- fail.
-pertence([Y|L],X):- Y=X.
-pertence([Y|L],X):- pertence(L,X).
-
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado apagar: Elemento,L1,L2 -> {V,F}
-
-apagar(E,[],[]).
-apagar(E,[E|L],L).
-apagar(E,[X|L],[X|R]):- apagar(E,L,R).
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado equalsLista: L1,L2 -> {V,F}
-
-equalsLista([],[]).
-equalsLista(L1,L2):- sublista(L1,L2), sublista(L2,L1).
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado subLista: L1,L2 -> {V,F}
-
-sublista(L,S) :- concatenar(L3,L2,L),
-		concatenar(L1,S,L3).
-
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado concatenar: L1,L2,R -> {V,F}
-
-concatenar(L,[],L).
-concatenar([],L,L).
-concatenar([X|T],R,[X|Z]):- concatenar(T,R,Z).
