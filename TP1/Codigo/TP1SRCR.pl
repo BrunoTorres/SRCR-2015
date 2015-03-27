@@ -30,6 +30,7 @@
 :- dynamic tetravo/2.
 :- dynamic neto/2.
 :- dynamic descendente/2.
+:- dynamic ascendente/2.
 :- dynamic grau/3.
 :- dynamic primo/2.
 :- dynamic relacao/3.
@@ -106,12 +107,6 @@
 					C==1
 					).
 
-
-+irmao( X,Y ) :: (solucoes( (X,Y), (irmao( X,Y )),S ),
-					comprimento( S,C ),
-					C==1
-					).
-
 +tio( X,Y ) :: (solucoes( (X,Y), (tio( X,Y )),S ),
 					comprimento( S,C ),
 					C==1
@@ -180,7 +175,7 @@ pai( P,F ) :-
 % Extensao do predicado avo: Avo,Neto -> {V,F}
 
 avo( A,N ) :-
-	filho( N,X ) , pai( A,X ).
+	pai( X, N ) , pai( A,X ).
 
 	avo(manuel,jorge).
 
@@ -204,27 +199,27 @@ sobrinho(S,T):- tio(T,S).
 % Extensao do predicado bisavo: Bisavo,Bisneto -> {V,F}
 
 bisavo( B,N ) :-
-	avo( A,N ) , filho( A,B ).
+	avo( A,N ) , pai( B,A ).
 
 bisavo( B,N ) :-
-	avo( B,X ) , filho( N,X ).
+	avo( B,X ) , pai( X,N ).
 	
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado trisavo: Trisavo,Trisneto -> {V,F}
 
 trisavo( T,N ) :-
-	bisavo( A,N ), filho( A,T ).
+	bisavo( A,N ), pai( T,A ).
 
 trisavo( T,N ) :-
-	bisavo( T,X ), filho( N,X ).
+	bisavo( T,X ), pai( X,N ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado tetravo: Tetravo,Tetraneto -> {V,F}
 
 tetravo( T,N ) :-
-	filho( N,X ), trisavo( T,X ).
+	pai( X,N ), trisavo( T,X ).
 tetravo( T,N ) :-
-	filho( A,T ), trisavo( A,N ).
+	pai( T,A ), trisavo( A,N ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado neto: Neto,Avo -> {V,F}
@@ -236,10 +231,10 @@ neto( N,A ) :-
 % Extensao do predicado descendente: Descendente,Ascendente -> {V,F}
 
 descendente( D,A ) :-	
-	filho(D,A). 
+	pai(A,D). 
 
 descendente( D,A ) :-
-	filho( D,X ) , descendente( X,A ).
+	pai( X,D ) , descendente( X,A ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado ascendente: Ascendente,Descendente -> {V,F}
@@ -251,10 +246,10 @@ ascendente( A,D ) :-
 % Extensao do predicado grau: Descendente,Ascendente,Grau -> {V,F}
 
 grau( D,A,1 ) :-
-	 filho( D,A ).
+	 pai( A,D ).
 
 grau( D,A,G ) :-
-	filho( D,X ) , grau( X,A,N ), N is G+1.
+	pai( D,X ) , grau( X,A,N ), N is G+1.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado primo: Primo1,Primo2 -> {V,F}
@@ -313,7 +308,7 @@ naturalidade(joana,braga).
 
 
 equalNaturalidade(P1,P2) :- 
-				naturalidade(P1,X), naturalidade(P2,X).
+				naturalidade(P1,X), naturalidade(P2,X), P1\==P2.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 %Extensao do predicado solucoes: Termo,Questao,Listasolucoes ->{V,F} 
