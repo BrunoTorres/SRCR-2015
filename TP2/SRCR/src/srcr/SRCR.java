@@ -17,7 +17,7 @@ import se.sics.jasper.SPException;
 public class SRCR {
 
     protected static SICStus sp;
-
+/*
     public SRCR(String pathToFile) {
         try {
             loadSICStus();
@@ -28,7 +28,7 @@ public class SRCR {
             System.exit(1);
         }
     }
-
+*/
     
 
     public Boolean check(String queryS) {
