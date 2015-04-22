@@ -28,6 +28,8 @@
 :- dynamic cor/2.
 :- dynamic conservacao/2.
 :- dynamic preco/2.
+:- dynamic registoCompra/3.
+:- dynamic registoVenda/3.
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -73,6 +75,7 @@
 	automovel(a0001, 'Fiat', 'Ferrari', '458 Italia', 2014, gasolina, 577, 2).
 	automovel(a0002, 'Fiat', 'Fiat', 'Punto', 1997, gasolina, 54, 5).
 	automovel(a0003, 'Volkswagen', 'Lamborghini', 'Aventador', 2013, gasolina, 700, 2).
+	automovel(a0004, '').
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado matricula: Matricula, Automovel, AnoDeRegisto -> {V,F,D}
@@ -95,7 +98,7 @@
 
 	cor('Vermelho', a0001).	
 	cor('Arancio Atlas',a0003).
-	%% Não se sabe a cor do fiat punto apenas se sabe que é um tom de vermelho
+	%% Não se sabe a cor do fiat punto apenas se sabe que é um tom de vermelho -> Conhecimento Impreciso
 	cor('Carmesim', a0002).
 	cor('Coral Claro', a0002).
 	cor('Salmao', a0002).
@@ -125,20 +128,38 @@
 	preco(390000,a0003).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado registoCompra: Preco, Automovel, Sujeito -> {V,F,D}
+% Extensao do predicado registoCompra: Preco, Automovel, ProprietárioAntigo -> {V,F,D}
 
+	registoCompra(195000,a0001,amilcar).
 
+	%% O fiat foi apreendido pela polícia e entregue ao stand por um preço muito baixo, o dono é desconhecido -> Conhecimento Incerto
+	registoCompra(300,a0002,proprietariodesc).
+
+	excecao( registoCompra( V, C, P ) ):-
+	    registoCompra( V, C, proprietariodesc ).
+
+	%% Conceito de mundo fechado para o registoCompra, não existe um registo de compra se não existir um predicado com esse registo e não existir nenhuma exceção 
+	-registoCompra( V, C, P ) :-
+	    nao( registoCompra( V, C, P ) ),
+	    nao( excecao( registoCompra( V, C, P ) ) ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Extensao do predicado registoVenda: Preco, Automovel, Sujeito -> {V,F,D}
+% Extensao do predicado registoVenda: Preco, Automovel, ProprietárioNovo -> {V,F,D}
 
+	registoVenda(370000,a0003,ricardo).
 
-
-
+	%% Uma celebridade atualmente na falência comprou um carro neste stand que considera fora do seu nível e, como não quer que a sua condição seja exposta ao público,
+	%% exige que o registo seja bloqueado agora e sempre a qualquer pessoa.
+	registoVenda(200,a0004,interdito).
+	excecao(registoVenda(V,A,P)):-
+		registoVenda(V,A,interdito).
+	nulo(interdito).
+	+registoVenda( V, A, P ) :: (solucoes( Ps,( registoVenda(V,a0004,Ps), nao( nulo(Ps) ) ), S ),
+                  comprimento( S,N ), N == 0 
+                  ).
 
 
 %%%%%%%%%%%%%%%%   Predicados exteriores ao contexto %%%%%%%%%%%%%%%%%
-
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 
