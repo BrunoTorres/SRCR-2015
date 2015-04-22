@@ -7,6 +7,7 @@ package View;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -77,16 +78,14 @@ public class Main_Controller implements Initializable {
         String query = esco.concat(this.queryText.getText()).concat(",R).");
         System.out.println(query);
         List<String> resultados = prolog.getStringResults(query);
-        System.out.println("cenas");
-        System.out.println(resultados.get(0));
+    
+        ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+        list.setItems(myObservableList);
+         
         
-       
-        System.out.println(resultados.get(0));
-        ObservableList<String> names = FXCollections.observableArrayList(resultados);
-         list = new ListView<>(names);
-                
+ 
 
-        
+
     }
 
 }
