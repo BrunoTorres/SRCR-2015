@@ -75,21 +75,32 @@ public class SRCR {
     }
 
     public static void main(String[] args) throws SPException, InterruptedException, Exception {
-        loadSICStus();
-        loadSICStusScrpt("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
+        //loadSICStus();
+        //loadSICStusScrpt("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
 
-        HashMap map = new HashMap();
-        Query query = sp.openPrologQuery("listening.", map);
-        while (query.nextSolution()) {
-            System.out.println(map.toString());
-        }
-            query.close();
+       SICStus sp;
+      String server; 
+   
+      sp = new SICStus(args,null);
+      
+      
+      sp.load("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
 
+      String queryS = null;
+      HashMap map = new HashMap();
+      Query query = null;
+      int vez=0;
+        if(vez==0){
+            map = new HashMap();
+            query = sp.openPrologQuery("listening.",map);
+                while (query.nextSolution()) {
+                    System.out.println(map.toString());
+                }
+                
+            vez++;
+            }
             
-            System.out.println("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
-            //loadSICStusScrpt("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl\"");
-            System.out.println("oks");
-
-        }
+        
+    }
 
     }
