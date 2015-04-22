@@ -41,12 +41,13 @@ public class SRCR {
     }
 
     public List<String> getStringResults(String queryS) throws InterruptedException, Exception {
-
+        System.out.println(queryS);
         ArrayList<String> results = new ArrayList<>();
         //String queryS = “predicate(‘term’,X).”;
         HashMap map = new HashMap();
         Query query = null;
         try {
+            ;
             query = sp.openPrologQuery(queryS, map);
         } catch (SPException ex) {
             Logger.getLogger(SRCR.class.getName()).log(Level.SEVERE, null, ex);

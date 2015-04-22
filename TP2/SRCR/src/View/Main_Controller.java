@@ -76,13 +76,15 @@ public class Main_Controller implements Initializable {
         System.out.println(queryText.getText());
         String query = esco.concat(this.queryText.getText()).concat(",R).");
         System.out.println(query);
-        List<String> resultados = prolog.getStringResults(esco);
-        /*
-        List<String> resultados = prolog.getStringResults(esco);
+        List<String> resultados = prolog.getStringResults(query);
+        System.out.println("cenas");
+        System.out.println(resultados.get(0));
+        
+       
         System.out.println(resultados.get(0));
         ObservableList<String> names = FXCollections.observableArrayList(resultados);
          list = new ListView<>(names);
-                */
+                
 
         
     }
