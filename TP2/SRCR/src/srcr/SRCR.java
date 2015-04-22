@@ -17,18 +17,17 @@ import se.sics.jasper.SPException;
 public class SRCR {
 
     protected static SICStus sp;
-/*
+
     public SRCR(String pathToFile) {
         try {
             loadSICStus();
-            System.out.println(pathToFile);
             loadSICStusScrpt(pathToFile);
         } catch (SPException ex) {
             Logger.getLogger(SRCR.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
     }
-*/
+
     
 
     public Boolean check(String queryS) {
@@ -73,7 +72,7 @@ public class SRCR {
         sp.load(path);
 
     }
-
+/*
     public static void main(String[] args) throws SPException, InterruptedException, Exception {
         //loadSICStus();
         //loadSICStusScrpt("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
@@ -102,5 +101,5 @@ public class SRCR {
             
         
     }
-
+*/
     }

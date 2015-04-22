@@ -7,6 +7,7 @@ package View;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,17 +16,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import srcr.SRCR;
 
 public class Main_Controller implements Initializable {
 
     @FXML
     private Button okButto;
 
-   @FXML
+    @FXML
     private TextField queryText;
 
     @FXML
@@ -36,6 +35,7 @@ public class Main_Controller implements Initializable {
 
     @FXML
     private ListView<String> list;
+    SRCR prolog;
 
     public Main_Controller() {
     }
@@ -49,7 +49,6 @@ public class Main_Controller implements Initializable {
         ObservableList<String> options = FXCollections.observableArrayList(estados);
         comboDemo.setItems(options);
 
-       
     }
 
     @FXML
@@ -60,15 +59,32 @@ public class Main_Controller implements Initializable {
     }
 
     @FXML
-    void okButtonAction() {
+    void okButtonAction() throws Exception {
+        this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
+
         int escolhido = comboDemo.getSelectionModel().getSelectedIndex();
-        
-        
-         ObservableList<String> items = FXCollections.observableArrayList(
-                "Single", "Double", "Suite", "Family App");
-        list.setItems(items);
+        String esco;
 
+        switch (escolhido) {
+            case 0:
+                esco = "demo(";
+                break;
+            default:
+                esco = "evolucao(";
+                break;
+        }
+        System.out.println(queryText.getText());
+        String query = esco.concat(this.queryText.getText()).concat(",R).");
+        System.out.println(query);
+        List<String> resultados = prolog.getStringResults(esco);
+        /*
+        List<String> resultados = prolog.getStringResults(esco);
+        System.out.println(resultados.get(0));
+        ObservableList<String> names = FXCollections.observableArrayList(resultados);
+         list = new ListView<>(names);
+                */
 
+        
     }
 
 }
