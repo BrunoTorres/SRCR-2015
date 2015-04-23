@@ -57,14 +57,31 @@
 					N==1
 					).
 
-+preco( P, A ) :: (solucoes( ( P, A ), (preco( P, A )),S ),
++preco( P, A ) :: (solucoes( ( P, A ), ( preco( P, A ) ), S ),
+					comprimento( S,N ),
+					N==1
+					).
++registoVenda( V, A, P ) :: (solucoes( ( V, A, P ), ( registoVenda( V, A, P ) ), S ),
+					comprimento( S,N ),
+					N==1
+					).
++registoCompra( V, A, P ) :: (solucoes( ( V, A, P ), ( registoCompra( V, A, P ) ), S ),
 					comprimento( S,N ),
 					N==1
 					).
 
+% Invariante: nao permitir a associação de uma mesma matrícula a um carro
++matricula( M, A, AR ) :: (solucoes( ( As, ARs ),(matricula( M, As, ARs )),S ),
+                  comprimento( S,N ), 
+				  N == 1
+                  ).
 
 
-
+% Invariante: nao permitir dois automóveis com o mesmo códigoAutomóvel
++automovel( CA, C, MA, MO, AF, CB, P, L ) :: (solucoes( ( Cs, MAs, MOs, AFs, CBs, Ps, Ls ),(automovel( CA, Cs, MAs, MOs, AFs, CBs, Ps, Ls  )),S ),
+                  comprimento( S,N ), 
+				  N == 1
+                  ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado automovel:  CodigoAutomovel, Construtor, Marca, Modelo, AnoDeFabrico, Combustivel, Potencia, Lugares-> {V,F,D}
@@ -130,6 +147,10 @@
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado registoCompra: Preco, Automovel, ProprietárioAntigo -> {V,F,D}
 
+	-registoCompra( V, C, P ) :-
+	    nao( registoCompra( V, C, P ) ),
+	    nao( excecao( registoCompra( V, C, P ) ) ).
+
 	registoCompra(195000,a0001,amilcar).
 
 	%% O fiat foi apreendido pela polícia e entregue ao stand por um preço muito baixo, o dono é desconhecido -> Conhecimento Incerto
@@ -138,13 +159,13 @@
 	excecao( registoCompra( V, C, P ) ):-
 	    registoCompra( V, C, proprietariodesc ).
 
-	%% Conceito de mundo fechado para o registoCompra, não existe um registo de compra se não existir um predicado com esse registo e não existir nenhuma exceção 
-	-registoCompra( V, C, P ) :-
-	    nao( registoCompra( V, C, P ) ),
-	    nao( excecao( registoCompra( V, C, P ) ) ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado registoVenda: Preco, Automovel, ProprietárioNovo -> {V,F,D}
+
+	-registoVenda( V, A, P ) :-
+	    nao( registoVenda( V, A, P ) ),
+	    nao( excecao( registoVenda( V, A, P ) ) ).
 
 	registoVenda(370000,a0003,ricardo).
 
@@ -197,9 +218,16 @@ nao( Questao ) :-
 nao( Questao ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensão do predicado remover que remove um dado facto
+
+remover( F ) :-
+	retract(F).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 
 solucoes( X,Y,Z ) :-
     findall( X,Y,Z ).
 
 comprimento( S,N ) :-
     length( S,N ).
+
