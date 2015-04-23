@@ -44,7 +44,7 @@ public class SrcrMain extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-        stage.setTitle("Login");
+        stage.setTitle("AutoUsados");
         
         
         

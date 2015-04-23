@@ -19,19 +19,24 @@
       </ImageView>
       <Button fx:id="LimparButton" layoutX="391.0" layoutY="226.0" mnemonicParsing="false" onAction="#limparButtonAction" styleClass="button_login_limpar" stylesheets="@Interface.css" text="Limpar" />
       <Button fx:id="okButto" layoutX="301.0" layoutY="226.0" mnemonicParsing="false" onAction="#okButtonAction" prefWidth="79.0" styleClass="button_login_login" stylesheets="@Interface.css" text="OK" />
-      <ComboBox fx:id="comboDemo" layoutX="69.0" layoutY="226.0" prefHeight="25.0" prefWidth="190.0" stylesheets="@Interface.css">
+      <ComboBox fx:id="comboDemo" layoutX="81.0" layoutY="226.0" prefHeight="25.0" prefWidth="190.0" stylesheets="@Interface.css">
          <styleClass>
             <String fx:value="comboFocus" />
             <String fx:value="comboFocusOut" />
             <String fx:value="comboTextField" />
          </styleClass>
       </ComboBox>
-      <Label layoutX="14.0" layoutY="179.0" text="Query">
+      <Label layoutX="20.0" layoutY="179.0" text="Query">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <ListView fx:id="list" layoutX="14.0" layoutY="281.0" prefHeight="305.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <TextField fx:id="queryText" layoutX="70.0" layoutY="176.0" prefHeight="26.0" prefWidth="462.0" />
+      <TextField fx:id="queryText" layoutX="82.0" layoutY="176.0" prefHeight="26.0" prefWidth="462.0" />
+      <Label layoutX="9.0" layoutY="229.0" text="Opções">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

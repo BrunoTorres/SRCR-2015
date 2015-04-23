@@ -39,23 +39,47 @@ public class SRCR {
             return false;
         }
     }
+    
+    
+    
+     public String getString(String queryS) throws SPException, InterruptedException, Exception{
+       
+        StringBuilder results = new StringBuilder();
+      
+            //String queryS = “predicate(‘term’,X).”;
+            
+            HashMap map = new HashMap();
+            Query query = sp.openPrologQuery(queryS,map);
+            while (query.nextSolution()) {
+                //System.out.println(map.toString());
+                
+                results.append(map.toString());
+            } 
+            query.close();
+       
+        return results.toString();
+    }
 
     public List<String> getStringResults(String queryS) throws InterruptedException, Exception {
         System.out.println(queryS);
         ArrayList<String> results = new ArrayList<>();
-        //String queryS = “predicate(‘term’,X).”;
         HashMap map = new HashMap();
         Query query = null;
+        
+        
+        //System.out.println("chegou  aqui "+ queryS);
+        
+        
         try {
-            ;
+            
             query = sp.openPrologQuery(queryS, map);
         } catch (SPException ex) {
             Logger.getLogger(SRCR.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             while (query.nextSolution()) {
-                //System.out.println(map.toString());
-
+                //System.out.println("resl " +map.toString());
+                
                 results.add(map.toString());
             }
         } catch (Exception ex) {

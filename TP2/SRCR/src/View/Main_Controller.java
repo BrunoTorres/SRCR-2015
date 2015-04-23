@@ -9,12 +9,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -47,8 +50,10 @@ public class Main_Controller implements Initializable {
         ArrayList<String> estados = new ArrayList<>();
         estados.add("Demo");
         estados.add("Evolução");
+        estados.add("Retract");
         ObservableList<String> options = FXCollections.observableArrayList(estados);
         comboDemo.setItems(options);
+        this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
 
     }
 
@@ -61,30 +66,100 @@ public class Main_Controller implements Initializable {
 
     @FXML
     void okButtonAction() throws Exception {
-        this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
 
         int escolhido = comboDemo.getSelectionModel().getSelectedIndex();
         String esco;
-
+        String query;
+        List<String> resultados;
+        boolean chek;
+        Optional<ButtonType> r;
+        Alert a;
         switch (escolhido) {
             case 0:
-                esco = "demo(";
-                break;
-            default:
-                esco = "evolucao(";
-                break;
-        }
-        System.out.println(queryText.getText());
-        String query = esco.concat(this.queryText.getText()).concat(",R).");
-        System.out.println(query);
-        List<String> resultados = prolog.getStringResults(query);
-    
-        ObservableList<String> myObservableList = FXCollections.observableList(resultados);
-        list.setItems(myObservableList);
-         
-        
- 
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
 
+                    r = a.showAndWait();
+                }
+                else{
+                esco = "demo(";
+                query = esco.concat(this.queryText.getText()).concat(",R).");
+                resultados = prolog.getStringResults(query);
+                ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+                list.setItems(myObservableList);
+                }
+                break;
+            case 1:
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
+
+                    r = a.showAndWait();
+                }
+                else{
+
+                esco = "evolucao(";
+
+                query = esco.concat(this.queryText.getText()).concat(").");
+
+                chek = prolog.check(query);
+                if (chek) {
+                    ObservableList<String> items = FXCollections.observableArrayList(
+                            "Inserido");
+                    list.setItems(items);
+                } else {
+                    ObservableList<String> items = FXCollections.observableArrayList(
+                            "Não Inserido");
+                    list.setItems(items);
+                }
+                }
+
+                break;
+            case 2:
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
+
+                    r = a.showAndWait();
+                }
+                 else{
+
+                esco = "retract(";
+                System.out.println("evolu");
+                query = esco.concat(this.queryText.getText()).concat(").");
+
+                chek = prolog.check(query);
+                if (chek) {
+                    ObservableList<String> items = FXCollections.observableArrayList(
+                            "Removido");
+                    list.setItems(items);
+                } else {
+                    ObservableList<String> items = FXCollections.observableArrayList(
+                            "Não Removido");
+                    list.setItems(items);
+                }
+                }
+
+                break;
+
+            default:
+
+                a = new Alert(Alert.AlertType.ERROR);
+                a.setTitle("ERRO");
+                a.setHeaderText(null);
+                a.setContentText("Escolha a opção ");
+
+                r = a.showAndWait();
+                break;
+
+        }
 
     }
 
