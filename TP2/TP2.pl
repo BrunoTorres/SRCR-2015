@@ -83,6 +83,17 @@
 				  N == 1
                   ).
 
+% Invariante: nao permitir que um mesmo código de automóvel exista em dois registos
++registoVenda( V, A, P ) :: (solucoes( ( Vs, A, Ps ), ( registoVenda( Vs, A, Ps ) ), S ),
+					comprimento( S,N ),
+					N==1
+					).
++registoCompra( V, A, P ) :: (solucoes( ( Vs, A, Ps ), ( registoCompra( Vs, A, Ps ) ), S ),
+					comprimento( S,N ),
+					N==1
+					).
+
+
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado automovel:  CodigoAutomovel, Construtor, Marca, Modelo, AnoDeFabrico, Combustivel, Potencia, Lugares-> {V,F,D}
 	-automovel( CA, C, MA, MO, AF, CB, P, L ) :-
@@ -92,7 +103,7 @@
 	automovel(a0001, 'Fiat', 'Ferrari', '458 Italia', 2014, gasolina, 577, 2).
 	automovel(a0002, 'Fiat', 'Fiat', 'Punto', 1997, gasolina, 54, 5).
 	automovel(a0003, 'Volkswagen', 'Lamborghini', 'Aventador', 2013, gasolina, 700, 2).
-	automovel(a0004, '').
+	automovel(a0004, 'Fiat', 'Fiat', 'Uno', 1993, gasolina, 45, 5).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado matricula: Matricula, Automovel, AnoDeRegisto -> {V,F,D}
@@ -157,7 +168,7 @@
 	registoCompra(300,a0002,proprietariodesc).
 
 	excecao( registoCompra( V, C, P ) ):-
-	    registoCompra( V, C, proprietariodesc ).
+	    registoCompra( Vs, C, proprietariodesc ).
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -173,7 +184,7 @@
 	%% exige que o registo seja bloqueado agora e sempre a qualquer pessoa.
 	registoVenda(200,a0004,interdito).
 	excecao(registoVenda(V,A,P)):-
-		registoVenda(V,A,interdito).
+		registoVenda(Vs,A,interdito).
 	nulo(interdito).
 	+registoVenda( V, A, P ) :: (solucoes( Ps,( registoVenda(V,a0004,Ps), nao( nulo(Ps) ) ), S ),
                   comprimento( S,N ), N == 0 
