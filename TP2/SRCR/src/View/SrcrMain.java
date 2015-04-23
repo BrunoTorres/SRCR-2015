@@ -5,23 +5,37 @@
  */
 package View;
 
+import java.util.Properties;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class SRCR extends Application {
 
-    public SRCR() {
+
+public class SrcrMain extends Application {
+    
+    //private ObservableList<Voluntario> vols = FXCollections.observableArrayList();
+    //private HabitatDAO HabitatDAO;
+    
+    public SrcrMain()  {
+        /*Properties props = new Properties();
+        props.setProperty("user", "habitat");
+        props.setProperty("password", "password");
+        props.setProperty("host", "servidor.freeum.info");
+        props.setProperty("port", "5223");
+        props.setProperty("db_type", "mysql");
+        HabitatDAO.setProperties(props);*/
     }
     
     @Override
     public void start(Stage stage) throws Exception {
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        MainController log_c;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        Main_Controller log_c;
         
         Parent root = loader.load();
         log_c = loader.getController();
@@ -33,17 +47,18 @@ public class SRCR extends Application {
         stage.setTitle("Login");
         
         
-      
         
-     
+        
         
     }
 
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         launch();
+        
+        launch(args);
     }
     
 }

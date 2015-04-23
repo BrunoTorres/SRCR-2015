@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.media.*?>
-<?import javafx.scene.image.*?>
+<?import java.net.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="649.0" prefWidth="310.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="View.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Main_Controller">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="14.0" layoutY="169.0" text="Questão" AnchorPane.leftAnchor="14.0" />
-            <Button fx:id="okButton" layoutX="11.0" layoutY="211.0" minHeight="0.0" minWidth="41.0" mnemonicParsing="false" onAction="#okButtonAction" text="Ok" AnchorPane.bottomAnchor="412.0" />
-            <Button fx:id="sairButton" layoutX="59.0" layoutY="211.0" mnemonicParsing="false" onAction="#sairButtonAction" text="Sair" AnchorPane.bottomAnchor="412.0" />
-            <ImageView fitHeight="123.0" fitWidth="200.0" layoutX="55.0" layoutY="14.0">
-               <image>
-                  <Image url="@../../../../../../../Desktop/Captura%20de%20ecrã%202015-04-22,%20às%2015.14.11.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="querieText" layoutX="74.0" layoutY="164.0" minWidth="177.0" prefHeight="26.0" prefWidth="187.0" />
-            <ListView layoutX="11.0" layoutY="264.0" prefHeight="385.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Separator layoutY="255.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-      </AnchorPane>
+      <ImageView fitHeight="135.0" fitWidth="262.0" layoutX="155.0" layoutY="14.0">
+         <image>
+            <Image url="@Bruno%20Sem%20Fundo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="LimparButton" layoutX="391.0" layoutY="226.0" mnemonicParsing="false" onAction="#limparButtonAction" styleClass="button_login_limpar" stylesheets="@Interface.css" text="Limpar" />
+      <Button fx:id="okButto" layoutX="301.0" layoutY="226.0" mnemonicParsing="false" onAction="#okButtonAction" prefWidth="79.0" styleClass="button_login_login" stylesheets="@Interface.css" text="OK" />
+      <ComboBox fx:id="comboDemo" layoutX="69.0" layoutY="226.0" prefHeight="25.0" prefWidth="190.0" stylesheets="@Interface.css">
+         <styleClass>
+            <String fx:value="comboFocus" />
+            <String fx:value="comboFocusOut" />
+            <String fx:value="comboTextField" />
+         </styleClass>
+      </ComboBox>
+      <Label layoutX="14.0" layoutY="179.0" text="Query">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ListView fx:id="list" layoutX="14.0" layoutY="281.0" prefHeight="305.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TextField fx:id="queryText" layoutX="70.0" layoutY="176.0" prefHeight="26.0" prefWidth="462.0" />
    </children>
 </AnchorPane>
