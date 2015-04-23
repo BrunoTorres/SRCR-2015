@@ -61,7 +61,7 @@ public class SRCR {
     }
 
     public List<String> getStringResults(String queryS) throws InterruptedException, Exception {
-        System.out.println(queryS);
+      
         ArrayList<String> results = new ArrayList<>();
         HashMap map = new HashMap();
         Query query = null;

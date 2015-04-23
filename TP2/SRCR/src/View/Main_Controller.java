@@ -51,6 +51,7 @@ public class Main_Controller implements Initializable {
         estados.add("Demo");
         estados.add("Evolução");
         estados.add("Retract");
+        estados.add("Normal");
         ObservableList<String> options = FXCollections.observableArrayList(estados);
         comboDemo.setItems(options);
         this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
@@ -83,13 +84,12 @@ public class Main_Controller implements Initializable {
                     a.setContentText("Insira a questão ");
 
                     r = a.showAndWait();
-                }
-                else{
-                esco = "demo(";
-                query = esco.concat(this.queryText.getText()).concat(",R).");
-                resultados = prolog.getStringResults(query);
-                ObservableList<String> myObservableList = FXCollections.observableList(resultados);
-                list.setItems(myObservableList);
+                } else {
+                    esco = "demo(";
+                    query = esco.concat(this.queryText.getText()).concat(",R).");
+                    resultados = prolog.getStringResults(query);
+                    ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+                    list.setItems(myObservableList);
                 }
                 break;
             case 1:
@@ -100,23 +100,22 @@ public class Main_Controller implements Initializable {
                     a.setContentText("Insira a questão ");
 
                     r = a.showAndWait();
-                }
-                else{
-
-                esco = "evolucao(";
-
-                query = esco.concat(this.queryText.getText()).concat(").");
-
-                chek = prolog.check(query);
-                if (chek) {
-                    ObservableList<String> items = FXCollections.observableArrayList(
-                            "Inserido");
-                    list.setItems(items);
                 } else {
-                    ObservableList<String> items = FXCollections.observableArrayList(
-                            "Não Inserido");
-                    list.setItems(items);
-                }
+
+                    esco = "evolucao(";
+
+                    query = esco.concat(this.queryText.getText()).concat(").");
+
+                    chek = prolog.check(query);
+                    if (chek) {
+                        ObservableList<String> items = FXCollections.observableArrayList(
+                                "Inserido");
+                        list.setItems(items);
+                    } else {
+                        ObservableList<String> items = FXCollections.observableArrayList(
+                                "Não Inserido");
+                        list.setItems(items);
+                    }
                 }
 
                 break;
@@ -128,23 +127,42 @@ public class Main_Controller implements Initializable {
                     a.setContentText("Insira a questão ");
 
                     r = a.showAndWait();
-                }
-                 else{
-
-                esco = "retract(";
-                System.out.println("evolu");
-                query = esco.concat(this.queryText.getText()).concat(").");
-
-                chek = prolog.check(query);
-                if (chek) {
-                    ObservableList<String> items = FXCollections.observableArrayList(
-                            "Removido");
-                    list.setItems(items);
                 } else {
-                    ObservableList<String> items = FXCollections.observableArrayList(
-                            "Não Removido");
-                    list.setItems(items);
+
+                    esco = "retract(";
+                    query = esco.concat(this.queryText.getText()).concat(").");
+
+                    chek = prolog.check(query);
+                    if (chek) {
+                        ObservableList<String> items = FXCollections.observableArrayList(
+                                "Removido");
+                        list.setItems(items);
+                    } else {
+                        ObservableList<String> items = FXCollections.observableArrayList(
+                                "Não Removido");
+                        list.setItems(items);
+                    }
                 }
+
+                break;
+            case 3:
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
+
+                    r = a.showAndWait();
+                } else {
+                    query = this.queryText.getText().concat(".");
+
+                    resultados = prolog.getStringResults(query);
+                    System.out.println("aquiii+++++++++++++++++");
+                    for(String s : resultados)
+                        System.out.println("s");
+                    System.out.println("+++++++++++++++++++");
+                    ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+                    list.setItems(myObservableList);
                 }
 
                 break;
