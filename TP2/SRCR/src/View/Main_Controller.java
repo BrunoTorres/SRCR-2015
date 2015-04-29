@@ -5,12 +5,15 @@
  */
 package View;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -46,12 +49,18 @@ public class Main_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+         PrintStream print = null;
+        try {
+            print = new PrintStream("ficheiro.txt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    System.setOut(print);
 
         ArrayList<String> estados = new ArrayList<>();
         estados.add("Demo");
         estados.add("Evolução");
         estados.add("Retract");
-        estados.add("Normal");
         ObservableList<String> options = FXCollections.observableArrayList(estados);
         comboDemo.setItems(options);
         this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
@@ -86,8 +95,13 @@ public class Main_Controller implements Initializable {
                     r = a.showAndWait();
                 } else {
                     esco = "demo(";
+                    
                     query = esco.concat(this.queryText.getText()).concat(",R).");
+              
+                   
+                   
                     resultados = prolog.getStringResults(query);
+                    //System.setOut(System.out);
                     ObservableList<String> myObservableList = FXCollections.observableList(resultados);
                     list.setItems(myObservableList);
                 }
@@ -145,27 +159,7 @@ public class Main_Controller implements Initializable {
                 }
 
                 break;
-            case 3:
-                if (this.queryText.getText().equals("")) {
-                    a = new Alert(Alert.AlertType.ERROR);
-                    a.setTitle("ERRO");
-                    a.setHeaderText(null);
-                    a.setContentText("Insira a questão ");
-
-                    r = a.showAndWait();
-                } else {
-                    query = this.queryText.getText().concat(".");
-
-                    resultados = prolog.getStringResults(query);
-                    System.out.println("aquiii+++++++++++++++++");
-                    for(String s : resultados)
-                        System.out.println("s");
-                    System.out.println("+++++++++++++++++++");
-                    ObservableList<String> myObservableList = FXCollections.observableList(resultados);
-                    list.setItems(myObservableList);
-                }
-
-                break;
+           
 
             default:
 
