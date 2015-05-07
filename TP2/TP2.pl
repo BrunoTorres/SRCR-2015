@@ -222,6 +222,30 @@ demo( Questao,desconhecido ) :-
     nao( -Questao ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Evolucao do meta-predicado demo: ListaQuestoes,Resposta -> {V,F}
+
+demoEvol([],verdadeiro).
+
+demoEvol([E|RL],verdadeiro):-
+		demo(E,verdadeiro), demoEvol(RL,verdadeiro).
+
+demoEvol([E|RL],falso):-
+		demo(E,X), nao(demoEvol(RL,desconhecido)), X \== desconhecido.
+
+demoEvol([E|RL],desconhecido):-
+		demo(E,desconhecido).
+demoEvol([E|RL],desconhecido):-
+		nao(demo(E,desconhecido)), demoEvol(RL,desconhecido).
+
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensão do predicado pertence: L,X ->{V,F}
+
+pertence([],X):- fail.
+pertence([Y|L],X):- Y=X.
+pertence([Y|L],X):- pertence(L,X).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do meta-predicado nao: Questao -> {V,F}
 
 nao( Questao ) :-
