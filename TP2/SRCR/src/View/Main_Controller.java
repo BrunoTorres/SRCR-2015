@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package View;
 
 import java.io.FileNotFoundException;
@@ -58,9 +60,12 @@ public class Main_Controller implements Initializable {
                     System.setOut(print);
 
         ArrayList<String> estados = new ArrayList<>();
-        estados.add("Demo");
+    
+        estados.add("Demo   ");                     // 0 Normal
+        estados.add("Evolução do Demo - 'e'");         // 1 &&
+        estados.add("Evolução do Demo -'ou'");        // 2 || 
         estados.add("Evolução");
-        estados.add("Retract");
+        estados.add("Remover");
         ObservableList<String> options = FXCollections.observableArrayList(estados);
         comboDemo.setItems(options);
         this.prolog = new SRCR("/Users/brunopereira/Documents/SourceTree/SRCR/Tp2/TP2.pl");
@@ -106,7 +111,49 @@ public class Main_Controller implements Initializable {
                     list.setItems(myObservableList);
                 }
                 break;
-            case 1:
+                case 1:
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
+
+                    r = a.showAndWait();
+                } else {
+                    esco = "demoE([";
+                    
+                    query = esco.concat(this.queryText.getText()).concat("],R).");
+              
+                   
+                   
+                    resultados = prolog.getStringResults(query);
+                    //System.setOut(System.out);
+                    ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+                    list.setItems(myObservableList);
+                }
+                break;
+                case 2:
+                if (this.queryText.getText().equals("")) {
+                    a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("ERRO");
+                    a.setHeaderText(null);
+                    a.setContentText("Insira a questão ");
+
+                    r = a.showAndWait();
+                } else {
+                    esco = "demoOu([";
+                    
+                    query = esco.concat(this.queryText.getText()).concat("],R).");
+              
+                   
+                   
+                    resultados = prolog.getStringResults(query);
+                    //System.setOut(System.out);
+                    ObservableList<String> myObservableList = FXCollections.observableList(resultados);
+                    list.setItems(myObservableList);
+                }
+                break;
+            case 3:
                 if (this.queryText.getText().equals("")) {
                     a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("ERRO");
@@ -116,7 +163,7 @@ public class Main_Controller implements Initializable {
                     r = a.showAndWait();
                 } else {
 
-                    esco = "evolucao(";
+                    esco = "evolEvol(";
 
                     query = esco.concat(this.queryText.getText()).concat(").");
 
@@ -133,7 +180,7 @@ public class Main_Controller implements Initializable {
                 }
 
                 break;
-            case 2:
+            case 4:
                 if (this.queryText.getText().equals("")) {
                     a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("ERRO");

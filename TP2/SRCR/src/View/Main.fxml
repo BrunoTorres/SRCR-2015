@@ -17,9 +17,9 @@
             <Image url="@Bruno%20Sem%20Fundo.png" />
          </image>
       </ImageView>
-      <Button fx:id="LimparButton" layoutX="391.0" layoutY="226.0" mnemonicParsing="false" onAction="#limparButtonAction" styleClass="button_login_limpar" stylesheets="@Interface.css" text="Limpar" />
-      <Button fx:id="okButto" layoutX="301.0" layoutY="226.0" mnemonicParsing="false" onAction="#okButtonAction" prefWidth="79.0" styleClass="button_login_login" stylesheets="@Interface.css" text="OK" />
-      <ComboBox fx:id="comboDemo" layoutX="81.0" layoutY="226.0" prefHeight="25.0" prefWidth="190.0" stylesheets="@Interface.css">
+      <Button fx:id="LimparButton" layoutX="465.0" layoutY="226.0" mnemonicParsing="false" onAction="#limparButtonAction" styleClass="button_login_limpar" stylesheets="@Interface.css" text="Limpar" />
+      <Button fx:id="okButto" layoutX="375.0" layoutY="226.0" mnemonicParsing="false" onAction="#okButtonAction" prefWidth="79.0" styleClass="button_login_login" stylesheets="@Interface.css" text="OK" />
+      <ComboBox fx:id="comboDemo" layoutX="81.0" layoutY="226.0" prefHeight="25.0" prefWidth="250.0" stylesheets="@Interface.css">
          <styleClass>
             <String fx:value="comboFocus" />
             <String fx:value="comboFocusOut" />
