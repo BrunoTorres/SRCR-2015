@@ -291,9 +291,9 @@ evolEvol(excecao(cor(X,Y)),desconhecido) :-
 
 	
 evolEvol(excecao(cor(X,Y)),desconhecido) :-
+	nao(cor(_,Y)),
 	evolucao(excecao(cor(X,Y))),
-	nao(cor(X,Y)),
-	nao(-cor(X,Y)).
+	nao(-cor(_,Y)).
 
 
 % Introduçao de conhecimento positivo e tem-se na base conhecimento impreciso
