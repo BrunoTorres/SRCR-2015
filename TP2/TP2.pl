@@ -200,6 +200,8 @@ evolucao( Termo ) :-
     insercao( Termo ),
     teste( Lista ).
 
+
+
 insercao( Termo ) :-
     assert( Termo ).
 insercao( Termo ) :-
@@ -222,20 +224,39 @@ demo( Questao,desconhecido ) :-
     nao( -Questao ).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
-% Evolucao do meta-predicado demo: ListaQuestoes,Resposta -> {V,F}
+% Evolucao do meta-predicado demo com o operador e: ListaQuestoes,Resposta -> {V,F}
 
-demoEvol([],verdadeiro).
+demoE([],verdadeiro).
 
-demoEvol([E|RL],verdadeiro):-
-		demo(E,verdadeiro), demoEvol(RL,verdadeiro).
+demoE([E|RL],verdadeiro):-
+		demo(E,verdadeiro), demoE(RL,verdadeiro).
 
-demoEvol([E|RL],falso):-
-		demo(E,X), nao(demoEvol(RL,desconhecido)), X \== desconhecido.
+demoE([E|RL],falso):-
+		demo(E,falso), nao(demoE(RL,desconhecido)).
+demoE([E|RL],falso):-
+		demo(E,verdadeiro), demoE(RL,falso).
 
-demoEvol([E|RL],desconhecido):-
+demoE([E|RL],desconhecido):-
 		demo(E,desconhecido).
-demoEvol([E|RL],desconhecido):-
-		nao(demo(E,desconhecido)), demoEvol(RL,desconhecido).
+demoE([E|RL],desconhecido):-
+		nao(demo(E,desconhecido)), demoE(RL,desconhecido).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Evolucao do meta-predicado demo com o operador ou: ListaQuestoes,Resposta -> {V,F}
+
+demoOu([],falso).
+demoOu([E|RL],verdadeiro):-
+		demo(E,verdadeiro).
+demoOu([E|RL],verdadeiro):-
+		nao(demo(E,verdadeiro)), demoOu(RL,verdadeiro).
+
+demoOu([E|RL],falso):-
+		demo(E,falso), demoOu(RL,falso).
+
+demoOu([E|RL],desconhecido):-
+		demo(E,desconhecido), nao(demoOu(RL,verdadeiro)).
+demoOu([E|RL],desconhecido):-
+		nao(demo(E,desconhecido)), demoOu(RL,desconhecido).
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
