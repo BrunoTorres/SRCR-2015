@@ -30,6 +30,8 @@
 :- dynamic preco/2.
 :- dynamic registoCompra/3.
 :- dynamic registoVenda/3.
+:- dynamic '-'/1.
+:- dynamic excecao/1.
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -92,6 +94,11 @@
 					comprimento( S,N ),
 					N==1
 					).
++excecao( Termo ) :: (solucoes( Termo, ( excecao( Termo ) ), S ),
+					comprimento( S,N ),
+					N==1
+					).
+
 
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
@@ -115,7 +122,13 @@
 	matricula('00-PL-00', a0001, 2015).
 	matricula('AA-00-00', a0002, 2000).
 	matricula('00-OG-00', a0003, 2014).
+
+	matricula(300,a0002,matdesc).
+
+	excecao( matricula( V, C, P ) ):-
+	    matricula( V, C, matdesc ).
 	
+	-matricula('qq',a0004,1999).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado cor: Cor, Automovel -> {V,F,D}
@@ -127,10 +140,18 @@
 	cor('Vermelho', a0001).	
 	cor('Arancio Atlas',a0003).
 	%% Não se sabe a cor do fiat punto apenas se sabe que é um tom de vermelho -> Conhecimento Impreciso
-	cor('Carmesim', a0002).
-	cor('Coral Claro', a0002).
-	cor('Salmao', a0002).
-	cor('Vermelho Indiano', a0002).
+	excecao(cor('Carmesim', a0002)).
+	excecao(cor('Coral Claro', a0002)).
+	excecao(cor('Salmao', a0002)).
+	excecao(cor('Vermelho Indiano', a0002)).
+
+	-cor('Azul',a0005).
+
+
+	excecao( cor( V, C ) ):-
+	    cor( cordesc, C ).
+	
+	cor(cordesc,carro3).
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do predicado conservacao: Estado, Automovel -> {V,F,D}
@@ -199,7 +220,68 @@ evolucao( Termo ) :-
     solucoes( Invariante,+Termo::Invariante,Lista ),
     insercao( Termo ),
     teste( Lista ).
+ %  ------------------------------------------ MATRICULA ----------------------------------------
 
+% Introduçao de conhecimento negativo e tem-se na base conhecimento imperfeito do tipo Incerto para o ano
+evolEvol(matricula(X,Y,Z),falso) :-
+	excecao(matricula(X,Y,V)),
+	remover(matricula(X,Y,V)),
+	evolucao(-matricula(X,Y,Z)).
+
+% Introduçao de conhecimento negativo e tem-se na base conhecimento imperfeito do tipo Incerto para o automovel
+evolEvol(matricula(X,Y,Z),falso) :-
+	excecao(matricula(X,V,Z)),
+	remover(matricula(X,V,Z)),
+	evolucao(-matricula(X,Y,Z)).
+
+% Introduçao de conhecimento negativo e tem-se na base conhecimento positivo
+evolEvol(matricula(X,Y,Z),falso) :-
+	remover(matricula(X,Y,Z)),
+	evolucao(-matricula(X,Y,Z)).
+
+% Introduçao de conhecimento positivo e tem-se na base conhecimento imperfeito do tipo Incerto para o ano
+evolEvol(matricula(X,Y,Z),verdadeiro) :-
+	excecao(matricula(X,Y,V)),
+	remover(matricula(X,Y,V)),
+	evolucao(matricula(X,Y,Z)).
+
+% Introduçao de conhecimento verdadeiro e tem-se na base conhecimento imperfeito do tipo Incerto para o automovel
+evolEvol(matricula(X,Y,Z),verdadeiro) :-
+	excecao(matricula(X,V,Z)),
+	remover(matricula(X,V,Z)),
+	evolucao(matricula(X,Y,Z)).
+
+% Introduçao de conhecimento verdadeiro e tem-se na base conhecimento negativo
+evolEvol(matricula(X,Y,Z),verdadeiro) :-
+	remover( -matricula(X,Y,Z)),
+	evolucao(matricula(X,Y,Z)).
+
+ %  ------------------------------------------ Cor ----------------------------------------
+
+% Introduçao de conhecimento desconhecido do tipo impreciso e tem-se na base conhecimento incerto
+evolEvol(excecao(cor(X,Y)),desconhecido) :-
+	excecao(cor(V,Y)),
+	remover(cor(V,Y)),
+	evolucao(excecao(cor(X,Y))). % As restantes variações devem ser introduzidas como evolEvol de conhecimento deconhecido com conhecimento perfeito na base de conhecimento
+
+	
+evolEvol(excecao(cor(X,Y)),desconhecido) :-
+	evolucao(excecao(cor(X,Y))),
+	nao(cor(X,Y)),
+	nao(-cor(X,Y)).
+
+
+% Introduçao de conhecimento positivo e tem-se na base conhecimento impreciso
+evolEvol(cor(X,Y),verdadeiro) :-
+	excecao(cor(_,Y)),
+	retractall(excecao(cor(_,Y))),
+	evolucao(cor(X,Y)).
+
+% Introduçao de conhecimento negativo e tem-se na base conhecimento impreciso
+evolEvol(cor(X,Y),falso) :-
+	excecao(cor(X,Y)),
+	retract(excecao(cor(X,Y))),
+	evolucao(-cor(X,Y)).
 
 
 insercao( Termo ) :-
