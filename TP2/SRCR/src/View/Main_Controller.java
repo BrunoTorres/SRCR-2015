@@ -127,7 +127,7 @@ public class Main_Controller implements Initializable {
                    
                    
                     resultados = prolog.getStringResults(query);
-                    //System.setOut(System.out);
+                   
                     ObservableList<String> myObservableList = FXCollections.observableList(resultados);
                     list.setItems(myObservableList);
                 }
@@ -148,7 +148,6 @@ public class Main_Controller implements Initializable {
                    
                    
                     resultados = prolog.getStringResults(query);
-                    //System.setOut(System.out);
                     ObservableList<String> myObservableList = FXCollections.observableList(resultados);
                     list.setItems(myObservableList);
                 }
