@@ -258,6 +258,31 @@ evolEvol(matricula(X,Y,Z),verdadeiro) :-
 
  %  ------------------------------------------ Cor ----------------------------------------
 
+
+% Introduçao de conhecimento negativo e tem-se na base conhecimento imperfeito do tipo Incerto para a cor
+evolEvol(cor(X,Y),falso) :-
+	excecao(cor(V,Y)),
+	remover(cor(V,Y)),
+	evolucao(-cor(X,Y)).
+
+% Introduçao de conhecimento negativo e tem-se na base conhecimento positivo
+evolEvol(cor(X,Y),falso) :-
+	remover(cor(X,Y)),
+	evolucao(-cor(X,Y)).
+
+% Introduçao de conhecimento positivo e tem-se na base conhecimento imperfeito do tipo Incerto para a cor
+evolEvol(cor(X,Y),verdadeiro) :-
+	excecao(cor(V,Y)),
+	remover(cor(V,Y)),
+	evolucao(cor(X,Y)).
+
+
+% Introduçao de conhecimento verdadeiro e tem-se na base conhecimento negativo
+evolEvol(cor(X,Y),verdadeiro) :-
+	remover( -cor(X,Y)),
+	evolucao(cor(X,Y)).
+
+
 % Introduçao de conhecimento desconhecido do tipo impreciso e tem-se na base conhecimento incerto
 evolEvol(excecao(cor(X,Y)),desconhecido) :-
 	excecao(cor(V,Y)),
