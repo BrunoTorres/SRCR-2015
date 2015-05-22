@@ -1,0 +1,45 @@
+fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(16,8), threshold = 0.1)
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 53.46687219     0.08912509276 37984
+
+________________________
+neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(8, 6), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 181.0239692     0.09020769883 23743
+
+_____________________________________
+
+neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(16, 8), threshold = 0.1,     algorithm = "sag")
+
+1 repetition was calculated.
+
+      Error Reached Threshold Steps
+1 75.268916     0.09981637527 36475
+
+
+____________________________
+
+: neuralnet(formula = FatigueLevel ~ Performance.MAMean + Performance.MVMean +     Performance.DDCMean + Performance.AEDMean, data = trainset,     hidden = c(16, 8), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 148.8169757     0.09488391195 50869
+_______________________________________________________
+%%%%%% 					MELHOR			$$$$$$$
+
+fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(20,16), threshold = 0.1)
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 11.40662883     0.09530239745 52050
+
+
+
+
+
