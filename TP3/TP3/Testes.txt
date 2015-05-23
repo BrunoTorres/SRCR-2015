@@ -31,7 +31,7 @@ ____________________________
         Error Reached Threshold Steps
 1 148.8169757     0.09488391195 50869
 _______________________________________________________
-%%%%%% 					MELHOR			$$$$$$$
+
 
 fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(20,16), threshold = 0.1)
 1 repetition was calculated.
@@ -45,6 +45,13 @@ fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Per
 
         Error Reached Threshold Steps
 1 11.01501003     0.09661785861 64215
+
+_______________________________________________________
+fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(24,20), threshold = 0.1)
+
+
+        Error Reached Threshold Steps
+1 6.426094698     0.09871858228 44441
 
 
 
