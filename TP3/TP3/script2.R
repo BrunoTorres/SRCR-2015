@@ -2,15 +2,14 @@
 library("neuralnet")
 
 
-dataset <- read.csv("/Users/brunopereira/Documents/SourceTree/SRCR/TP3/DadosTP3.csv",header=TRUE,sep=";",dec=".")
+dataset <- read.csv("/Users/brunopereira/Documents/SourceTree/SRCR/TP3/DadosTP3_2.csv",header=TRUE,sep=";",dec=".")
 trainset <- dataset[1:700, ]
 
-testset <- dataset[200:400, ]
+testset <- dataset[701:845, ]
 
 
 #fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(8,6), threshold = 0.1)
-fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+Performance.Task, trainset, hidden = c(20,16), threshold = 0.1)
-#fadiganet <- neuralnet(FatigueLevel ~ Performance.MAMean+Performance.MVMean+Performance.DDCMean+Performance.AEDMean, trainset, hidden = c(16,8), threshold = 0.1)
+fadiganet <- neuralnet(FatigueLevel ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DMSMean, trainset, hidden = c(20,16,6), threshold = 0.01)#fadiganet <- neuralnet(FatigueLevel ~ Performance.MAMean+Performance.MVMean+Performance.DDCMean+Performance.AEDMean, trainset, hidden = c(16,8), threshold = 0.1)
 
 print(fadiganet)
 ?neuralnet
@@ -25,7 +24,5 @@ results <- data.frame(actual = testset$FatigueLevel, prediction = fadiganet.resu
 
 results$prediction <- round(results$prediction)
 View(results)
-results
+#results
 results$prediction <- round(results$prediction)
-
-rmse(c(testset$FatigueLevel),c(results$prediction))
