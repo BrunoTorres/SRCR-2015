@@ -1,0 +1,72 @@
+------------------------------------------
+Teste 1:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 15.53881078     0.09963276669 36090
+
+------------------------------------------
+Teste 2:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 12.28460929     0.09644114657 42955
+
+------------------------------------------
+Teste 3:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+       Error Reached Threshold Steps
+1 15.1568844      0.0987377886 34861
+
+------------------------------------------
+Teste 4:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 6.434509689     0.09911087559 21924
+
+------------------------------------------
+Teste 5:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 10.08447533     0.09911773449 37807
+
+------------------------------------------
+Teste 6:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 5.870310109     0.09950673146 38582
+
+
+------------------------------------------
+Teste 7:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 3.198930515     0.09799707195 17710
+
+------------------------------------------
+Teste 8:
+Call: neuralnet(formula = FatigueLevel ~ Performance.KDTMean + Performance.MAMean +     Performance.MVMean + Performance.TBCMean + Performance.DDCMean +     Performance.DMSMean + Performance.AEDMean + Performance.ADMSLMean +     Performance.Task, data = trainset, hidden = c(20, 16), threshold = 0.1)
+
+1 repetition was calculated.
+
+        Error Reached Threshold Steps
+1 5.392447048      0.0937653441 13658

@@ -2,7 +2,7 @@
 library("neuralnet")
 
 
-dataset <- read.csv("/Users/brunopereira/Documents/SourceTree/SRCR/TP3/DadosRandomTP3.csv",header=TRUE,sep=";",dec=".")
+dataset <- read.csv("C:\\Users\\patricia\\Desktop\\SRCR-2015\\TP3DadosRandomTP3.csv",header=TRUE,sep=";",dec=".")
 trainset <- dataset[1:700, ]
 
 testset <- dataset[701:845, ]
