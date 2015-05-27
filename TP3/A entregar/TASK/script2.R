@@ -8,7 +8,7 @@ testset <- dataset[600:700, ]
 #Teste 1
 tasknet <- neuralnet(Performance.Task ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+FatigueLevel, trainset, hidden = c(8,6), threshold = 0.1)
 #Teste 2
-tasknet <- neuralnet(Performance.Task ~ Performance.MAMean+Performance.MVMean+Performance.DDCMean+Performance.AEDMean, trainset, hidden = c(16,8), threshold = 0.1)
+tasknet <- neuralnet(Performance.Task ~ Performance.MAMean+Performance.MVMean+Performance.DDCMean+Performance.AEDMean, trainset, hidden = c(30,15), threshold = 0.1)
 #Teste 3
 tasknet <- neuralnet(Performance.Task ~ Performance.KDTMean+Performance.MAMean+Performance.MVMean+Performance.TBCMean+Performance.DDCMean+Performance.DMSMean+Performance.AEDMean+Performance.ADMSLMean+FatigueLevel, trainset, hidden = c(30,15), threshold = 0.1)
 
