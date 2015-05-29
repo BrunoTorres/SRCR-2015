@@ -1,4 +1,4 @@
-######################################################### Script de resposta ao Ponto 1 do 3? Exercicio Pratico ###########################################
+######################################################### Script de resposta ao Ponto 1 do 3º Exercicio Pratico ###########################################
 library("neuralnet")
 
 dataset <- read.csv("C:\\Users\\patricia\\Desktop\\SRCR-2015\\TP3\\DadosTP3.csv",header=TRUE,sep=";",dec=".")
